@@ -1,0 +1,12 @@
+{
+  "domain": "http://ad.cpahub.ru",
+  "params": {
+    "utm_source": "source",
+    "utm_medium": "aff_sub",
+    "utm_campaign": "aff_sub2",
+    "utm_term": "aff_sub3",
+    "utm_keyword": "aff_sub4",
+    "utm_content": "aff_sub5",
+    "url": "url"
+  }
+}

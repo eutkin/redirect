@@ -1,0 +1,11 @@
+{
+  "domain": "http://y.actionpay.ru",
+  "params": {
+    "utm_medium": "apsubid1",
+    "utm_campaign": "apsubid2",
+    "utm_term": "apsubid3",
+    "utm_keyword": "apsubid4",
+    "utm_content": "apsubid5",
+    "url": "url"
+  }
+}

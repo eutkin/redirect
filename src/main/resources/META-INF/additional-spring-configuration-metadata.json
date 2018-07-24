@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "redirect-service.cookie-cache.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Включает кеширование переходов по куки."
+    },
+    {
+      "name": "redirect-service-ip-cached.enable",
+      "type": "java.lang.Boolean",
+      "description": "Включает кеширование переходов по ip."
+    }
+  ]
+}

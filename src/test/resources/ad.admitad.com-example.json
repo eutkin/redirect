@@ -1,0 +1,12 @@
+{
+  "domain": "http://ad.admitad.com",
+  "params": {
+    "utm_source": "utm_source",
+    "utm_medium": "subid",
+    "utm_campaign": "subid1",
+    "utm_term": "subid2",
+    "utm_keyword": "subid3",
+    "utm_content": "subid4",
+    "url": "upl"
+  }
+}
