@@ -6,10 +6,7 @@ import net.eutkin.redirect.service.RedirectService;
 import net.eutkin.redirect.view.RedirectView;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +56,7 @@ public class RedirectController {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
+    @ResponseBody
     public String exceptionHandler() {
         return "Произошла ошибка";
     }
