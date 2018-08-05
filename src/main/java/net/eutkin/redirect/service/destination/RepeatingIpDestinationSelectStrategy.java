@@ -25,7 +25,7 @@ public class RepeatingIpDestinationSelectStrategy implements DestinationSelectSt
 
     public RepeatingIpDestinationSelectStrategy(
             LogRepository logRepository,
-            @Value("${redirect-service-ip-cached.enable}:true") boolean enabled
+            @Value("${redirect-service-ip-cached.enable:true}") boolean enabled
     ) {
         this.enabled = enabled;
         this.logRepository = requireNonNull(logRepository);
