@@ -1,5 +1,6 @@
 package net.eutkin.redirect.web;
 
+import lombok.extern.slf4j.Slf4j;
 import net.eutkin.redirect.service.logging.RedirectLogger;
 import net.eutkin.redirect.service.util.CookieValueEncryptor;
 import net.eutkin.redirect.service.RedirectService;
@@ -24,6 +25,7 @@ import static java.util.Objects.requireNonNull;
  * @author Евгений Уткин (evgeny.utkin@mediascope.net)
  */
 @Controller
+@Slf4j
 public class RedirectController {
 
     private final RedirectService redirectService;
@@ -57,7 +59,8 @@ public class RedirectController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public String exceptionHandler() {
+    public String exceptionHandler(Exception ex) {
+        log.error(ex.getMessage(), ex);
         return "Произошла ошибка";
     }
 }
