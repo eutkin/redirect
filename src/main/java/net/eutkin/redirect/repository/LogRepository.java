@@ -17,6 +17,10 @@ import java.util.UUID;
  */
 public interface LogRepository extends JpaRepository<LogRecord, UUID> {
 
-    @Query("SELECT lr from net.eutkin.redirect.entity.LogRecord lr where ip = :ip order by lr.time desc")
+    @Query("select lr " +
+            "from net.eutkin.redirect.entity.LogRecord lr " +
+            "where ip = :ip " +
+            "  and lr.time = (select max(l.time) from LogRecord l where l.ip = lr.ip) "
+    )
     Optional<LogRecord> findLastRedirectByIp(@Param("ip") String ip);
 }
