@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 
+import java.net.URL;
+
 /**
  * <p>
  * Создан 07.07.2016
@@ -26,6 +28,9 @@ public class RedirectView {
         View view = getView().getView();
         if (view instanceof AbstractUrlBasedView) {
             return ((AbstractUrlBasedView) view).getUrl();
+        }
+        if (this.view.getModelMap().containsAttribute("url")) {
+            return this.view.getModel().get("url").toString();
         }
         throw new RuntimeException("View is not url-based");
     }
