@@ -36,7 +36,7 @@ public class RepeatingIpDestinationSelectStrategy implements DestinationSelectSt
     public boolean support(Source source, HttpServletRequest request) {
         if (!enabled) return false;
         String remoteIp = request.getRemoteAddr();
-        Optional<LogRecord> lastRedirectByIp = logRepository.findLastRedirectByIp(remoteIp);
+        Optional<LogRecord> lastRedirectByIp = logRepository.findLastRedirectByIp(remoteIp, source.getPath());
         lastRedirectByIp.ifPresent(record -> cachedRecords.get().put(record.getIp(), record));
         return lastRedirectByIp.isPresent();
     }
