@@ -28,7 +28,7 @@ public class LogRecord {
 
     @Id
     @Column(name = "id")
-    @Type(type="org.hibernate.type.PostgresUUIDType")
+//    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(name = "redirect_time")

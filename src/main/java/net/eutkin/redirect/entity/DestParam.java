@@ -16,10 +16,10 @@ import static javax.persistence.EnumType.STRING;
 public class DestParam {
 
     @Id
-    @Type(type="org.hibernate.type.PostgresUUIDType")
+//    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
-    @Type(type="org.hibernate.type.PostgresUUIDType")
+//    @Type(type="org.hibernate.type.PostgresUUIDType")
     @Column(name = "dest_id")
     private UUID destId;
     @Column(name = "domain")
