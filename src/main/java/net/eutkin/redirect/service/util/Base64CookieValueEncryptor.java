@@ -3,7 +3,7 @@ package net.eutkin.redirect.service.util;
 import lombok.SneakyThrows;
 import net.eutkin.redirect.entity.RedirectType;
 import net.eutkin.redirect.service.model.Redirect;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -36,7 +36,7 @@ public class Base64CookieValueEncryptor implements CookieValueEncryptor {
         return redirect;
     }
 
-    @NotNull
+    @NonNull
     public String encrypt(String url, RedirectType type, String guid) {
         String raw = url + ";" + type.name();
         if (guid != null) {

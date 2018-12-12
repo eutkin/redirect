@@ -2,7 +2,7 @@ package net.eutkin.redirect.service.destination;
 
 import net.eutkin.redirect.entity.Source;
 import net.eutkin.redirect.service.model.Redirect;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.core.OrderComparator;
 import org.springframework.core.Ordered;
 
@@ -22,7 +22,7 @@ public interface DestinationSelectStrategy extends Ordered, Comparable<Destinati
     Redirect getRedirectView(Source source, HttpServletRequest request);
 
     @Override
-    default int compareTo(@NotNull DestinationSelectStrategy o) {
+    default int compareTo(@NonNull DestinationSelectStrategy o) {
         return OrderComparator.INSTANCE.compare(this, o);
     }
 

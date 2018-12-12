@@ -9,13 +9,13 @@ import lombok.val;
 import net.eutkin.redirect.entity.Destination;
 import net.eutkin.redirect.entity.RedirectType;
 import net.eutkin.redirect.entity.Source;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Collections.emptyList;
 import static java.util.Objects.isNull;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.toList;
@@ -67,7 +67,7 @@ public class SourceView {
                 .setRandom(isRandom);
         List<Destination> destinations;
         if (isNull(urls)) {
-            destinations =  emptyList();
+            destinations =  new ArrayList<>();
         } else {
             destinations = urls.stream().map(url -> new Destination()
                     .setDefault(false)

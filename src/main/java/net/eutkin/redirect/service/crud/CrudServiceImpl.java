@@ -7,7 +7,6 @@ import net.eutkin.redirect.entity.Source;
 import net.eutkin.redirect.repository.DestParamRepository;
 import net.eutkin.redirect.repository.ParameterRepository;
 import net.eutkin.redirect.repository.SourcesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,12 +16,19 @@ import java.util.UUID;
 @Service
 public class CrudServiceImpl implements CrudService {
 
-    @Autowired
-    private SourcesRepository sourcesRepository;
-    @Autowired
-    private ParameterRepository parameterRepository;
-    @Autowired
-    private DestParamRepository destParamRepository;
+    private final SourcesRepository sourcesRepository;
+    private final ParameterRepository parameterRepository;
+    private final DestParamRepository destParamRepository;
+
+    public CrudServiceImpl(
+            SourcesRepository sourcesRepository,
+            ParameterRepository parameterRepository,
+            DestParamRepository destParamRepository
+    ) {
+        this.sourcesRepository = sourcesRepository;
+        this.parameterRepository = parameterRepository;
+        this.destParamRepository = destParamRepository;
+    }
 
     @Override
     @Transactional
@@ -33,7 +39,7 @@ public class CrudServiceImpl implements CrudService {
             for (val parameter : parameters) {
                 DestParam destParam = new DestParam()
                         .setDestId(destination.getId())
-                        .setDomain(destination.getDomain())
+                        .setPath(destination.getDomain())
                         .setSrcName(parameter.getSrcName())
                         .setId(UUID.randomUUID());
                 destParamRepository.save(destParam);
@@ -44,7 +50,7 @@ public class CrudServiceImpl implements CrudService {
     @Transactional
     @Override
     public void saveParameters(List<Parameter> parameters) {
-        parameterRepository.save(parameters);
+        parameterRepository.saveAll(parameters);
 
     }
 }

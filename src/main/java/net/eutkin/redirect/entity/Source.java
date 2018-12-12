@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import net.eutkin.redirect.entity.converter.StringsToString;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.net.URL;
@@ -59,12 +59,12 @@ public class Source {
         return !getDestinations().isEmpty();
     }
 
-    @NotNull
+    @NonNull
     public List<Destination> getDestinations() {
         return destinations.stream().filter(destination -> !destination.isDefault()).collect(toList());
     }
 
-    @NotNull
+    @NonNull
     public Destination getDefaultDestination() {
         return destinations
                 .stream()

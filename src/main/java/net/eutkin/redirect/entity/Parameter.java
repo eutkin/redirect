@@ -8,6 +8,8 @@ import javax.persistence.*;
 import static javax.persistence.EnumType.STRING;
 
 /**
+ * Сущность, которая хранит информацию о маппинге
+ * параметров для определенного домена
  * <p>
  * Создан 07.07.2016
  * <p>

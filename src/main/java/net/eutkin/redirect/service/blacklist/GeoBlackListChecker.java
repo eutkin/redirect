@@ -6,7 +6,7 @@ import com.maxmind.geoip2.model.CountryResponse;
 import com.maxmind.geoip2.record.Country;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.eutkin.redirect.service.blacklist.BlackListChecker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ClassPathResource;
@@ -31,6 +31,7 @@ public class GeoBlackListChecker implements BlackListChecker {
 
     private final DatabaseReader databaseReader;
 
+    @Autowired
     public GeoBlackListChecker(
             @Value("${geo.location.country-iso-code.white-list}") String whiteListIsoCodes
     ) {

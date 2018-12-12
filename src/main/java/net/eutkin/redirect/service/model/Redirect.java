@@ -1,7 +1,7 @@
 package net.eutkin.redirect.service.model;
 
 import net.eutkin.redirect.entity.RedirectType;
-import org.jetbrains.annotations.Nullable;
+import org.springframework.lang.Nullable;
 
 import java.net.URL;
 

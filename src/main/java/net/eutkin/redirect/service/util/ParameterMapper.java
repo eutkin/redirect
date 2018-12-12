@@ -5,7 +5,7 @@ import net.eutkin.redirect.entity.Destination;
 import net.eutkin.redirect.entity.Parameter;
 import net.eutkin.redirect.entity.ParameterName;
 import net.eutkin.redirect.service.model.UrlMapping;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 
 import java.net.URL;
 import java.util.Collection;
@@ -32,8 +32,8 @@ public interface ParameterMapper {
         return map(requireNonNull(url).getQuery(), destination);
     }
 
-    @NotNull
-    default EnumMap<ParameterName, String> queryStringToMap(@NotNull String queryString) {
+    @NonNull
+    default EnumMap<ParameterName, String> queryStringToMap(@NonNull String queryString) {
         val query = queryString.startsWith("?") ? queryString.substring(1) : queryString;
         val buffer = Stream.of(query.split("&"))
                 .map(s -> s.split("="))
@@ -41,8 +41,8 @@ public interface ParameterMapper {
         return new EnumMap<>(buffer);
     }
 
-    @NotNull
-    default EnumMap<ParameterName, Parameter> parametersToMap(@NotNull Collection<Parameter> parameters) {
+    @NonNull
+    default EnumMap<ParameterName, Parameter> parametersToMap(@NonNull Collection<Parameter> parameters) {
         if (parameters.isEmpty()) return new EnumMap<>(ParameterName.class);
         val buffer = parameters.stream().collect(toMap(Parameter::getSrcName, p -> p));
         return new EnumMap<>(buffer);

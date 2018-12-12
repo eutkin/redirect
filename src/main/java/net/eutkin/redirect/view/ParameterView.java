@@ -3,9 +3,9 @@ package net.eutkin.redirect.view;
 import lombok.Data;
 import net.eutkin.redirect.entity.Parameter;
 import net.eutkin.redirect.entity.ParameterName;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;

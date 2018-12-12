@@ -9,6 +9,16 @@
       "name": "redirect-service-ip-cached.enable",
       "type": "java.lang.Boolean",
       "description": "Включает кеширование переходов по ip."
+    },
+    {
+      "name": "redirect-service.user.password",
+      "type": "java.lang.String",
+      "description": "User password for admin operations."
+    },
+    {
+      "name": "geo.location.country-iso-code.white-list",
+      "type": "java.lang.String",
+      "description": "White list of country iso codes that are allowed to redirect."
     }
   ]
 }
