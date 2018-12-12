@@ -1,4 +1,4 @@
-package net.eutkin.redirect.service.geo;
+package net.eutkin.redirect.service.blacklist;
 
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
@@ -25,20 +25,20 @@ import static java.util.stream.Collectors.toSet;
 @Service
 @ConditionalOnProperty("geo.location.country-iso-code.white-list")
 @Slf4j
-public class GeoLocatorByIp implements BlackListChecker {
+public class GeoBlackListChecker implements BlackListChecker {
 
     private final Set<String> whiteListIsoCodes;
 
     private final DatabaseReader databaseReader;
 
-    public GeoLocatorByIp(
+    public GeoBlackListChecker(
             @Value("${geo.location.country-iso-code.white-list}") String whiteListIsoCodes
     ) {
         this(Stream.of(whiteListIsoCodes.split(",")));
     }
 
     @SneakyThrows(IOException.class)
-    public GeoLocatorByIp(
+    public GeoBlackListChecker(
             Stream<String> whiteListIsoCodes
     ) {
         this.whiteListIsoCodes = (whiteListIsoCodes == null ? Stream.<String>empty() : whiteListIsoCodes)

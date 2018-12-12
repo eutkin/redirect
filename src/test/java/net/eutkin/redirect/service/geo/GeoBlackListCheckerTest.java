@@ -1,6 +1,7 @@
 package net.eutkin.redirect.service.geo;
 
 import net.eutkin.redirect.service.blacklist.BlackListChecker;
+import net.eutkin.redirect.service.blacklist.GeoBlackListChecker;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GeoLocatorByIpTest {
+public class GeoBlackListCheckerTest {
 
     @Autowired
     private BlackListChecker blackListChecker;
@@ -33,7 +34,7 @@ public class GeoLocatorByIpTest {
 
         @Bean
         public BlackListChecker blackListChecker( @Value("${geo.location.country-iso-code.white-list:}") String whiteList) {
-            return new GeoLocatorByIp(whiteList);
+            return new GeoBlackListChecker(whiteList);
         }
     }
 }
