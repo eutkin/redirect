@@ -52,7 +52,7 @@ public class Source {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "source", fetch = EAGER, cascade={ALL})
+    @OneToMany(mappedBy = "source", fetch = EAGER, cascade={ALL}, orphanRemoval = true)
     private List<Destination> destinations;
 
     public boolean hasDestination() {
