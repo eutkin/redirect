@@ -39,7 +39,7 @@ public class CrudServiceImpl implements CrudService {
             for (val parameter : parameters) {
                 DestParam destParam = new DestParam()
                         .setDestId(destination.getId())
-                        .setPath(destination.getDomain())
+                        .setDomain(destination.getDomain())
                         .setSrcName(parameter.getSrcName())
                         .setId(UUID.randomUUID());
                 destParamRepository.save(destParam);

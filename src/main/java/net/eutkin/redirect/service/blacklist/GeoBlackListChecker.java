@@ -6,19 +6,17 @@ import com.maxmind.geoip2.model.CountryResponse;
 import com.maxmind.geoip2.record.Country;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -31,24 +29,19 @@ public class GeoBlackListChecker implements BlackListChecker {
 
     private final DatabaseReader databaseReader;
 
-    @Autowired
-    public GeoBlackListChecker(
-            @Value("${geo.location.country-iso-code.white-list}") String whiteListIsoCodes
-    ) {
-        this(Stream.of(whiteListIsoCodes.split(",")));
-    }
-
     @SneakyThrows(IOException.class)
     public GeoBlackListChecker(
-            Stream<String> whiteListIsoCodes
+            @Value("${geo.location.country-iso-code.white-list}") List<String> whiteListIsoCodes
     ) {
-        this.whiteListIsoCodes = (whiteListIsoCodes == null ? Stream.<String>empty() : whiteListIsoCodes)
+        this.whiteListIsoCodes = whiteListIsoCodes
+                .stream()
                 .map(String::trim)
                 .map(String::toUpperCase)
                 .collect(toSet());
         Resource resource = new ClassPathResource("GeoLite2-Country.mmdb");
-        File file = resource.getFile();
-        this.databaseReader = new DatabaseReader.Builder(file).build();
+        try(InputStream inputStream = resource.getInputStream()) {
+            this.databaseReader = new DatabaseReader.Builder(inputStream).build();
+        }
     }
 
 

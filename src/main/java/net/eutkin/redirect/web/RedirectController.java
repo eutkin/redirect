@@ -1,10 +1,13 @@
 package net.eutkin.redirect.web;
 
 import lombok.extern.slf4j.Slf4j;
+import net.eutkin.redirect.event.RedirectEvent;
+import net.eutkin.redirect.service.RedirectService;
 import net.eutkin.redirect.service.logging.RedirectLogger;
 import net.eutkin.redirect.service.util.CookieValueEncryptor;
-import net.eutkin.redirect.service.RedirectService;
 import net.eutkin.redirect.view.RedirectView;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
@@ -26,11 +28,12 @@ import static java.util.Objects.requireNonNull;
  */
 @Controller
 @Slf4j
-public class RedirectController {
+public class RedirectController implements ApplicationEventPublisherAware {
 
     private final RedirectService redirectService;
     private final CookieValueEncryptor cookieValueEncryptor;
     private final RedirectLogger logger;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     public RedirectController(RedirectService redirectService, CookieValueEncryptor cookieValueEncryptor, RedirectLogger logger) {
         this.redirectService = requireNonNull(redirectService);
@@ -50,8 +53,11 @@ public class RedirectController {
                 .ifPresent(response::addCookie);
 
         redirectView.ifPresent(view -> {
-            logger.log(path, request.getRemoteAddr(), view);
+            applicationEventPublisher.publishEvent(
+                    RedirectEvent.builder().path(path).ip(request.getRemoteAddr()).view(view).build()
+            );
         });
+
 
         return redirectView.map(RedirectView::getView).orElse(null);
     }
@@ -62,5 +68,10 @@ public class RedirectController {
     public String exceptionHandler(Exception ex) {
         log.error(ex.getMessage(), ex);
         return "Произошла ошибка";
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 }

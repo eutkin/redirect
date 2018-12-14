@@ -10,5 +10,6 @@ import net.eutkin.redirect.view.RedirectView;
  * @author Евгений Уткин (evgeny.utkin@mediascope.net)
  */
 public interface RedirectLogger {
+
     void log(String path, String clientIp, RedirectView redirectView);
 }

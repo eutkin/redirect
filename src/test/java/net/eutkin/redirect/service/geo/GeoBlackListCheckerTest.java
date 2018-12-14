@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = GeoBlackListCheckerTest.Config.class)
 public class GeoBlackListCheckerTest {
 
     @Autowired
@@ -33,7 +34,7 @@ public class GeoBlackListCheckerTest {
     static class Config {
 
         @Bean
-        public BlackListChecker blackListChecker( @Value("${geo.location.country-iso-code.white-list:}") String whiteList) {
+        public BlackListChecker blackListChecker( @Value("${geo.location.country-iso-code.white-list}") List<String> whiteList) {
             return new GeoBlackListChecker(whiteList);
         }
     }
