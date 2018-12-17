@@ -1,5 +1,35 @@
 language: java
 jdk: openjdk11
 
+sudo: required
+
+services:
+  - docker
+
+env:
+  - COMMIT=${TRAVIS_COMMIT::7}
+
 script:
   - ./mvnw install -B
+
+#before_deploy:
+#  - git config --local user.name
+#  - git config --local user.email
+#  - export VERSION_TAG=
+#  - git tag $VERSION_TAG
+#
+#deploy:
+#  provider: releases
+#  api_key:
+#  file:
+#  skip_cleanup: true
+#  on:
+#    tags: true
+
+#after_success:
+#  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+#  - export IMAGE_NAME=justlink/redirect
+#  - docker build -t $IMAGE_NAME:$COMMIT .
+#  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+#  - docker push $IMAGE_NAME

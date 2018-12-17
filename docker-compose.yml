@@ -1,0 +1,16 @@
+version: '3.6'
+
+services:
+  redirect:
+    hostname: redirect
+    image: justlink/redirect:latest
+    ports:
+     - "80:80"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 3s
+        order: start-first
+      restart_policy:
+        condition: any
